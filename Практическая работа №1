@@ -1,0 +1,52 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+void SelectionSort(int* arr, int a, bool alpha = false) {
+	setlocale(0, "");
+	clock_t start, end;
+	start = clock();
+	unsigned long lala = 0;
+	unsigned long iter = 0;
+	for (int i = 0; i < a - 1; ++i) {
+		iter = alpha ? iter + 1 : iter;
+		int read = i;
+		for (int j = i + 1; j < a; ++j) {
+			iter = alpha ? iter + 1 : iter;
+			if (arr[j] < arr[read]) {
+				read = j;
+			}
+		}
+		swap(arr[i], arr[read]);
+		lala = alpha ? lala + 1 : lala;
+	}
+	unsigned long* info = new unsigned long[2];
+	info[0] = lala;
+	info[1] = iter;
+	end = clock();
+	double seconds;
+	seconds = ((double)end - start) / ((double)CLOCKS_PER_SEC);
+	cout << "Время: " << seconds << endl;
+	cout << "Кол-во престановок: " << info[0] << endl;
+	cout << "Кол-во итераций: " << info[1] << endl;
+	cout << "Сумма перестановок и итераций: " << info[0] + info[1] << endl;
+}
+
+int main() {
+	int n;
+	cin >> n;
+	int* A = new int[n];
+	for (int i = 0; i < n; i++) {
+		A[i] = 1 + rand();
+		cout << A[i] << " ";
+	}
+	cout << endl;
+
+	SelectionSort(A, n, true);
+	if (n < 1000000) {
+
+		for (int j = 0; j < n; j++) {
+			cout << A[j] << " ";
+		}
+	}
+	return 0;
+}
