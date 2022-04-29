@@ -1,0 +1,31 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+//Практическая работа №4
+int TheWitcher(int A[], int size, int num)
+{
+    A[size] = num;
+    int i = 0;
+    while (A[i] != num)
+        i++;
+    return i < size ? i : -1;
+}
+
+int main() {
+    setlocale(0, "");
+    srand(time(0));
+    int n, num;
+    cin >> n;
+    int* A = new int[n];
+    for (int i = 0; i < n; ++i)
+    {
+        A[i] = 1 + rand();
+        cout << A[i] << " ";
+    }
+    cout << endl;
+    cout << "Введите число : ";
+    cin >> num;
+    cout << "Позиция числа : " << TheWitcher(A, n, num);
+    cout << endl;
+    return 0;
+}
